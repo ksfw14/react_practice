@@ -2,12 +2,13 @@ version: '3.9'
 
 services:
   node:
-    build: ./docker/node
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+    container_name: react_app_container
     tty: true
-    environment:
-      - NODE_ENV=production
     volumes:
-      - ./node:/usr/src/app:cached
-    command: sh -c "cd react-sample && yarn start"
+      - ./node/react-sample:/usr/src/app:cached
+      - /usr/src/app/node_modules
     ports:
       - "3000:3000"
