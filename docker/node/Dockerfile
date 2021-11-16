@@ -1,7 +1,9 @@
 FROM node:16-alpine
 WORKDIR /usr/src/app
-
-#  環境の準備
+COPY ./node/react-sample/ ./
 RUN npm install -g npm \
-    npm install @material-ui/core \
-    && rm -rf /var/lib/apt/lists/*
+&& npm install \
+&& rm -rf /var/lib/apt/lists/*
+RUN npm run build
+CMD [ "npm", "run", "start" ]
+EXPOSE 3000
